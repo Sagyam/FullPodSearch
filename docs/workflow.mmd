@@ -1,0 +1,27 @@
+flowchart TB
+    subgraph Input
+        A[Podcast Audio File] --> B[Audio Preprocessor]
+    end
+
+    subgraph Processing
+        B --> C[Whisper ASR]
+        C --> D[Topic Segmentation]
+        D --> E[LLM Processing]
+        E --> F[Tag Generation]
+    end
+
+    subgraph Storage
+        G[(Vector Database)]
+        H[(Document Store)]
+    end
+
+    subgraph Search
+        I[Search API]
+        J[Recommendation Engine]
+    end
+
+    E --> G
+    F --> H
+    G --> I
+    G --> J
+    H --> I

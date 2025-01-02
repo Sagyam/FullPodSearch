@@ -1,0 +1,39 @@
+flowchart TB
+    subgraph "Frontend"
+        A[Next.js Frontend]
+    end
+
+    subgraph "API Gateway"
+        B[Nginx API Gateway]
+    end
+
+    subgraph "Core Services"
+        C[Upload Service]
+        D[Processing Service]
+        E[Search Service]
+        F[Recommendation Service]
+    end
+
+    subgraph "Message Queue"
+        G[RabbitMQ]
+    end
+
+    subgraph "Storage"
+        H[(MinIO)]
+        I[(PostgreSQL)]
+        J[(Redis)]
+        K[(Milvus)]
+    end
+
+    subgraph "ML Services"
+        L[ASR Service]
+        M[LLM Service]
+        N[Embedding Service]
+    end
+
+    A --> B
+    B --> C & D & E & F
+    C --> G
+    G --> D
+    D --> L & M & N
+    D & E & F --> H & I & J & K

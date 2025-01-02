@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: 
+      context: ../../frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../../frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+
+  upload-service:
+    build:
+      context: ../../services/upload-service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - MINIO_ENDPOINT=minio:9000
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+    depends_on:
+      - minio
+      - rabbitmq
+
+  processing-service:
+    build:
+      context: ../../services/processing-service
+      dockerfile: Dockerfile
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+    depends_on:
+      - rabbitmq
+
+  search-service:
+    build:
+      context: ../../services/search-service
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - POSTGRES_URL=postgresql://postgres:postgres@postgres:5432/fullpodsearch
+      - MILVUS_HOST=milvus
+    depends_on:
+      - postgres
+      - milvus
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=fullpodsearch
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  milvus:
+    image: milvusdb/milvus:latest
+    ports:
+      - "19530:19530"
+    volumes:
+      - milvus_data:/var/lib/milvus
+
+volumes:
+  postgres_data:
+  minio_data:
+  milvus_data:
