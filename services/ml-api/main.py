@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import List
 import uvicorn
 
-app = FastAPI(title="Processing Service")
+app = FastAPI(title="ML API")
 
 class ProcessRequest(BaseModel):
     file_id: str
