@@ -19,7 +19,7 @@ This platform leverages cutting-edge machine learning models and a modern tech s
 11. [License](#license)
 
 
-## 1. [Introduction](#introduction)
+## Introduction
 This application transforms the way users interact with podcasts by providing a platform where they can:
 
 1. Upload podcasts.
@@ -29,7 +29,7 @@ This application transforms the way users interact with podcasts by providing a 
 
 Designed for podcast enthusiasts, researchers, and media professionals, this platform unlocks new possibilities for podcast discovery and analysis.
 
-## 2. [Features](#features)
+## Features
 - **Podcast Upload:** Upload large audio files with ease.
 - **Automatic Transcription:** Converts speech into text using advanced ASR (Automatic Speech Recognition).
 - **Intelligent Segmentation:** Breaks podcasts into searchable, topic-based segments.
@@ -37,7 +37,7 @@ Designed for podcast enthusiasts, researchers, and media professionals, this pla
 - **Recommendations:** Suggests related podcasts based on content similarity.
 - **Scalable and Modular:** Built with microservices to ensure scalability and maintainability.
 
-## 3. [Tech Stack](#tech-stack)
+## Tech Stack
 - **Frontend:**
 	- Framework: React
     - Event Handling: React Query
@@ -63,12 +63,12 @@ Designed for podcast enthusiasts, researchers, and media professionals, this pla
 
 - **Message Queue:** RabbitMQ
 
-## 4. [Architecture](#architecture)
+## Architecture
 <img alt="High-Level Architecture" src="./docs/architecture.png"/>
 <img alt="Detailed Architecture" src="./docs/workflow.png"/>
 
 
-## 5. [Installation](#installation)
+## Installation
 ### Prerequisites
 - Docker and Docker Compose
 - Python 3.13+
@@ -94,27 +94,19 @@ docker compose -f ./docker/docker-compose.yml up --build
 - MinIO: http://localhost:9000
 - RabbitMQ: http://localhost:15672
 
-## 6. [Usage](#usage)
+## Usage
 
-## 7. [API Endpoints](#api-endpoints)
+## API Endpoints
 - ### Upload Service
 - ### Search Service
 - ### Recommendations Service
 - ### Processing Service
 
-## 8. [Configuration](#configuration)
+## Configuration
+
 ### Environment Variables
 Set the following environment variables in a .env file:
 ```bash
-# Backend
-API_GATEWAY_PORT=8000
-UPLOAD_SERVICE_PORT=8001
-PROCESSING_SERVICE_PORT=8002
-
-# ML Services
-ASR_SERVICE_PORT=8003
-LLM_SERVICE_PORT=8004
-
 # Storage
 POSTGRES_URI=postgresql://user:password@localhost:5432/dbname
 REDIS_URI=redis://localhost:6379
@@ -123,14 +115,14 @@ MILVUS_URI=milvus://localhost:19530
 
 ```
 
-## 9. [Troubleshooting](#troubleshooting)
+## Troubleshooting
 
 - **Service Not Starting:** Ensure Docker is running and all dependencies are installed.
 - **Slow Search:** Check if the Vector Database is indexed correctly.
 - **Failed Uploads:** Verify MinIO and RabbitMQ are running.
 
-## 10. [Contributing](#contributing)
+## Contributing
 - Sagyam Thapa: [LinkedIn](https://www.linkedin.com/in/sagyam/)
 
-## 11. [License](#license)
+## License
 This project is licensed under the MIT License. See the LICENSE file for details.
